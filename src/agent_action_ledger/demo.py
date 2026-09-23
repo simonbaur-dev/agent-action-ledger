@@ -246,7 +246,10 @@ def _run_in(directory: Path, echo: Callable[[str], Any]) -> Dict[str, Any]:
         report = ActionLedger.verify_snapshot(snapshot_path)
         echo(f"   wrote {snapshot_path.name} ({manifest['bytes']} bytes)")
         echo(f"   sha256 {manifest['sha256'][:16]}...")
-        echo(f"   verify -> ok={report['ok']} cases={report['cases']} armed={report['writes_armed']}")
+        echo(
+            f"   verify -> ok={report['ok']} cases={report['cases']} "
+            f"armed={report['writes_armed']}"
+        )
 
         restored = ActionLedger(snapshot_path)
         try:
