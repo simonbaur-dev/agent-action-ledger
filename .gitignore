@@ -1,0 +1,54 @@
+# Ledgers and their sidecars are operational data, not source. See SECURITY.md:
+# a ledger records what an agent did to real systems, and the payloads are
+# usually the most sensitive thing in the repository's blast radius.
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite.manifest.json
+*.db
+*.db-wal
+*.db-shm
+*.lock
+*.init.lock
+/snapshots/
+/ledgers/
+/var/
+.ledger-snapshot-*/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+.venv/
+venv/
+env/
+pip-wheel-metadata/
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Anything that looks like a credential has no business here.
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json

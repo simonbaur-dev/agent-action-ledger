@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-action-ledger"
+version = "0.1.0"
+description = "A durable transaction kernel for autonomous agents: cases, leases, append-only history and action receipts that only settle against an authoritative read-back."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+keywords = ["agents", "idempotency", "sqlite", "ledger", "durability", "workflow"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+# No runtime dependencies, on purpose. A component whose job is to still be
+# correct after a crash should not be able to break because of someone else's
+# release. Everything here is the Python standard library.
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.5",
+]
+
+[project.scripts]
+agent-ledger = "agent_action_ledger.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/simonbaur-dev/agent-action-ledger"
+Source = "https://github.com/simonbaur-dev/agent-action-ledger"
+Issues = "https://github.com/simonbaur-dev/agent-action-ledger/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_action_ledger"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/examples",
+    "/README.md",
+    "/LICENSE",
+    "/SECURITY.md",
+    "/CONTRIBUTING.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+src = ["src", "tests", "examples"]
+
+[tool.ruff.lint]
+# Deliberately conservative: correctness and obvious mistakes, not style
+# opinions. Import order in particular is left alone, because the imports in
+# this package are grouped by what they are for rather than alphabetically.
+select = ["E", "F", "W"]

@@ -1,0 +1,19 @@
+# Normalise line endings: LF in the repository, native in the working tree.
+* text=auto eol=lf
+
+*.py    text eol=lf diff=python
+*.toml  text eol=lf
+*.md    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.cfg   text eol=lf
+*.txt   text eol=lf
+*.json  text eol=lf
+.gitignore      text eol=lf
+.gitattributes  text eol=lf
+LICENSE         text eol=lf
+
+# SQLite ledgers and snapshots must never be diffed or line-ending mangled.
+# They should also never be committed at all -- see .gitignore and SECURITY.md.
+*.sqlite binary
+*.db     binary
